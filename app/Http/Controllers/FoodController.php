@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 use App\Models\Food;
-
+use App\Models\Utilistaur;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\JsonResponse;
 class FoodController extends Controller
 {
     public function create(Request $request)
@@ -108,5 +111,27 @@ public function index()
     // Return a JSON response with the food items
     return response()->json(['foods' => $foods], 200);
 }
+public function register(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string',
+       
+        'email' => 'required|email|unique:utilisateurs',
+        'password' => 'required|min:8',
+        
+    ]);
 
+    // Create a user
+    $user = Utilistaur::create([
+        'name' => $request->input('name'),
+       
+        'email' => $request->input('email'),
+        'password' => Hash::make($request->input('password')),
+        
+    ]);
+
+    // Create a client associated with the user
+    
+    return response()->json(['user' => $user, 'message' => 'User registered successfully'], 201);
+}
 }
