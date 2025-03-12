@@ -3,16 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Laravel\Sanctum\HasApiTokens; // Make sure to import HasApiTokens
-use Illuminate\Foundation\Auth\User as Authenticatable; // Use the correct Authenticatable class
+use Laravel\Sanctum\HasApiTokens; 
+use Illuminate\Foundation\Auth\User as Authenticatable; 
 use Illuminate\Database\Eloquent\Model;
 
 class Utilistaur extends Authenticatable
 {
-    use HasFactory, HasApiTokens; // Add HasApiTokens to the model
+    use HasFactory, HasApiTokens; 
 
-    protected $table = 'utilistaurs'; // Specify the table name if it's not the plural form of the model name
-    protected $primaryKey = 'id'; // Specify the primary key if it's not the default 'id'
+    protected $table = 'utilistaurs'; 
+    protected $primaryKey = 'id'; 
 
     protected $fillable = [
         'name',
